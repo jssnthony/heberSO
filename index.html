@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="icon" href="https://ddragon.leagueoflegends.com/cdn/14.19.1/img/spell/MissFortuneViciousStrikes.png">
+    <title>Heber OS</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: url('https://ddragon.leagueoflegends.com/cdn/img/champion/splash/MissFortune_0.jpg') no-repeat center center fixed; background-size: cover; overflow: hidden; }
+        .taskbar { position: fixed; bottom: 0; left: 0; width: 100%; height: 40px; background: rgba(0, 0, 0, 0.7); color: white; display: flex; align-items: center; padding: 0 10px; justify-content: space-between; }
+        .start-button { background: #631d0e; padding: 5px 15px; border-radius: 5px; cursor: pointer; }
+        .clock { padding: 5px; }
+        .desktop-icons { position: absolute; top: 20px; left: 20px; display: flex; flex-direction: column; gap: 10px; }
+        .icon { width: 100px; height: 90px; background: rgba(255, 255, 255, 0.8); text-align: center; padding: 10px; border-radius: 5px; cursor: pointer; }
+        .window { position: absolute; top: 50px; left: 50px;  height: 80%;  max-height: 600px; width: 600px; max-width: 600px; background: white; box-shadow: 2px 2px 10px rgba(0,0,0,0.3); border-radius: 5px; display: none; }
+        .window-terminal{ background: #280a04cc; color: aqua; display: flex; flex-direction: column;}
+      
+        
+        .window-header { background: #631d0e; color: white; padding: 5px; cursor: move; display: flex; justify-content: space-between; align-items: center; }
+        .close-button { background: red; color: white; border: none; padding: 5px; cursor: pointer; }
+        .window-content { padding: 10px;  height: 100%; max-height: 550px; width: 600px; max-width: 600px; overflow-y: auto;}
+        .img-icon{ width: 50px; height: 50px;}
+        .terminal-input { width: 100%; }
+    </style>
+</head>
+<body>
+    <div class="desktop-icons">
+        <div class="icon" onclick="openWindow('terminal')"><img class="img-icon" src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExOGd0dHB0amwzNHY0eWhoa2NzdXBtZG5sMXN1MnptZTJmYmd0a2N2OSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/B4dt6rXq6nABilHTYM/giphy.gif"> <br /> HTerminal</div>
+        <div class="icon" onclick="openWindow('calculator')"><img class="img-icon" src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExMWlvYmY5d2J4Mnk3ZjN1dWlodHdmOHhtam9iamF6YWJzcnBmamdsZCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3owzW5c1tPq63MPmWk/giphy.gif"> <br /> HCalc</div>
+        <a href="https://letmegooglethat.com/?q=como+farmear+correctamente+lol+guia+facil" class="icon"><img class="img-icon" src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExcDdyNDJ3dnQ0emo1ZTA4ZjU0cXloN2w3YWIyZWZqNWczbmF0ZXlrYyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/E4l3Bs0rGcBiM/giphy.gif"> <br /> HBrowser</a>
+        <a href="#" class="icon">📂 <br /> HFiles</a>
+        <a href="#" class="icon">🎵 <br /> HMusic</a>
+        <a href="#" class="icon">📺 <br /> HVideos</a>
+        <div class="icon" onclick="openWindow('gallery')"><img class="img-icon" src="https://ddragon.leagueoflegends.com/cdn/14.19.1/img/spell/MissFortuneRicochetShot.png"> <br /> HGallery</div>
+        
+    </div>
+    <div class="taskbar">
+        <div class="start-button">HStart</div>
+        <div class="clock" id="clock"></div>
+    </div>
+    <!--TERMINAL-->
+    <div class="window window-terminal" id="terminal">
+        <div class="window-header">Terminal <button class="close-button" onclick="closeWindow('terminal')">X</button></div>
+        <div class="window-content">
+            <pre id="terminal-output">HeberOS Terminal
+                Type -help to get the command list.</pre>
+            <input type="text" class="terminal-input" id="terminal-input" onkeypress="handleTerminal(event)">
+        </div>
+    </div>
+    <!--END TERMINAL-->
+
+    <!--CALCULATOR-->
+    <div class="window" id="calculator">
+        <div class="window-header">Calculator Pro 3000 hecho en Mexico por egresados de gastronomia de la UABC<button class="close-button" onclick="closeWindow('calculator')">X</button></div>
+        <div class="window-content">
+            <input type="text" id="calc-input" placeholder="Ingrese número">
+            <button onclick="fakeSum()">Sumar</button>
+            <p>Resultado: <span id="calc-result"></span></p>
+        </div>
+    </div>
+    <!--END CALCULATOR-->
+
+    <!--gallery-->
+    <div class="window" id="gallery">
+        <div class="window-header">HPhotos<button class="close-button" onclick="closeWindow('gallery')">X</button></div>
+        <div class="window-content">
+            <a href="files/001.jpg" target="_blank"><img width="100" src="files/001.jpg"/></a>
+            <a href="files/002.jpg" target="_blank"><img width="100" src="files/002.jpg"/></a>
+            <a href="files/003.jpg" target="_blank"><img width="100" src="files/003.jpg"/></a>
+            <a href="files/004.jpg" target="_blank"><img width="100" src="files/004.jpg"/></a>
+            <a href="files/005.jpg" target="_blank"><img width="100" src="files/005.jpg"/></a>
+            <a href="files/006.jpg" target="_blank"><img width="100" src="files/006.jpg"/></a>
+            <a href="files/007.jpg" target="_blank"><img width="100" src="files/007.jpg"/></a>
+            <a href="files/008.jpg" target="_blank"><img width="100" src="files/008.jpg"/></a>
+            <a href="files/009.jpg" target="_blank"><img width="100" src="files/009.jpg"/></a>
+            <a href="files/010.jpg" target="_blank"><img width="100" src="files/010.jpg"/></a>
+            <a href="files/011.jpg" target="_blank"><img width="100" src="files/011.jpg"/></a>
+            <a href="files/012.jpg" target="_blank"><img width="100" src="files/012.jpg"/></a>
+            <a href="files/013.jpg" target="_blank"><img width="100" src="files/013.jpg"/></a>
+            <a href="files/014.jpg" target="_blank"><img width="100" src="files/014.jpg"/></a>
+            <a href="files/015.jpg" target="_blank"><img width="100" src="files/015.jpg"/></a>
+            <a href="files/016.jpg" target="_blank"><img width="100" src="files/016.jpg"/></a>
+            <a href="files/017.jpg" target="_blank"><img width="100" src="files/017.jpg"/></a>
+            <a href="files/001.png" target="_blank"><img width="100" src="files/001.png"/></a>
+            <a href="files/002.png" target="_blank"><img width="100" src="files/002.png"/></a>
+            <a href="files/003.png" target="_blank"><img width="100" src="files/003.png"/></a>
+        </div>
+    </div>
+    <!--END gallery-->
+
+
+    <script>
+
+        //bloqueo de zoom
+        document.addEventListener('wheel', function(event) {
+            if (event.ctrlKey) {
+                event.preventDefault();
+            }
+        }, { passive: false });
+
+        document.addEventListener('keydown', function(event) {
+            if (event.ctrlKey && (event.key === '+' || event.key === '-' || event.key === '0')) {
+                event.preventDefault();
+            }
+        });
+        //end bloqueo de zoom 
+        //funcion de ventanas
+        function openWindow(id) {
+            document.getElementById(id).style.display = 'block';
+        }
+
+        function closeWindow(id) {
+            document.getElementById(id).style.display = 'none';
+        }
+        //end funcion de ventanas
+
+        //cerrar todas  las ventanas
+        closeWindow('terminal')
+        closeWindow('calculator')
+        closeWindow('gallery')
+        //end cerrar todas las ventanas
+
+        //funcion de arrastre de ventanas 
+            //terminal
+            let terminal_isDragging = false;
+            let terminal_offsetX, terminal_offsetY;
+
+            var terminal_header = document.getElementById('terminal');
+            var terminal_windowEl = document.getElementById('terminal');
+            
+            terminal_header.addEventListener('mousedown', (e) => {
+                terminal_isDragging = true;
+                terminal_offsetX = e.clientX - terminal_windowEl.offsetLeft;
+                terminal_offsetY = e.clientY - terminal_windowEl.offsetTop;
+            });
+            document.addEventListener('mousemove', (e) => {
+                if (terminal_isDragging) {
+                    terminal_windowEl.style.left = `${e.clientX - terminal_offsetX}px`;
+                    terminal_windowEl.style.top = `${e.clientY - terminal_offsetY}px`;
+                }
+            });
+            document.addEventListener('mouseup', () => { terminal_isDragging = false; });
+
+            //calculadora
+            let calculator_isDragging = false;
+            let calculator_offsetX, calculator_offsetY;
+
+            var calculator_header = document.getElementById('calculator');
+            var calculator_windowEl = document.getElementById('calculator');
+            
+            calculator_header.addEventListener('mousedown', (e) => {
+                calculator_isDragging = true;
+                calculator_offsetX = e.clientX - calculator_windowEl.offsetLeft;
+                calculator_offsetY = e.clientY - calculator_windowEl.offsetTop;
+            });
+            document.addEventListener('mousemove', (e) => {
+                if (calculator_isDragging) {
+                    calculator_windowEl.style.left = `${e.clientX - calculator_offsetX}px`;
+                    calculator_windowEl.style.top = `${e.clientY - calculator_offsetY}px`;
+                }
+            });
+            document.addEventListener('mouseup', () => { calculator_isDragging = false; });
+
+
+            //gallery
+            let gallery_isDragging = false;
+            let gallery_offsetX, gallery_offsetY;
+
+            var gallery_header = document.getElementById('gallery');
+            var gallery_windowEl = document.getElementById('gallery');
+            
+            gallery_header.addEventListener('mousedown', (e) => {
+                gallery_isDragging = true;
+                gallery_offsetX = e.clientX - gallery_windowEl.offsetLeft;
+                gallery_offsetY = e.clientY - gallery_windowEl.offsetTop;
+            });
+            document.addEventListener('mousemove', (e) => {
+                if (gallery_isDragging) {
+                    gallery_windowEl.style.left = `${e.clientX - gallery_offsetX}px`;
+                    gallery_windowEl.style.top = `${e.clientY - gallery_offsetY}px`;
+                }
+            });
+            document.addEventListener('mouseup', () => { gallery_isDragging = false; });
+        //termian funcion de arrastre de ventanas
+
+        
+
+        // --- inicia funcion del reloj
+        function updateCountdown() {
+            const eventDate = new Date("December 22, 2032 00:00:00").getTime();
+            const now = new Date().getTime();
+            const timeLeft = eventDate - now;
+
+            const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+            document.getElementById("clock").innerText = `Días para que caiga YR4: ${days}d ${hours}h ${minutes}m ${seconds}s`;
+        }
+
+        setInterval(updateCountdown, 1000);
+    
+        // --- termina funcion del reloj
+
+
+        //funcion de la terminal
+
+        const commands = {
+            "-help": "Commands:<br/> -gemi-help,<br/> -gemi-info,<br/> -gemi-date",
+            "-gemi-help": "mandemiamor",
+            "-gemi-info": "Welcome to HeberOS v1.0",
+            "-gemi-date": () => new Date().toLocaleString(),
+            "kys": "Florida ma&ntilde; has been muted <br/> for the rest of the game for using <br/> inappropiate language <br/> and will not longer <br/> receive any chat messages. ",
+            "feedback": "Instant Feedback Report"
+        };
+
+        function handleTerminal(event) {
+            if (event.key === "Enter") {
+                const input = document.getElementById("terminal-input");
+                const output = document.getElementById("terminal-output");
+                const command = input.value.trim().toLowerCase();
+                input.value = "";
+
+                if (commands[command]) {
+                    const response = typeof commands[command] === "function" ? commands[command]() : commands[command];
+                    output.innerHTML += `\n> ${command}\n${response}`;
+                } else {
+                    output.innerHTML += `\n> ${command}\nComando no reconocido. Usa -help para ver la lista de comandos.`;
+                }
+
+                output.scrollTop = output.scrollHeight;
+            }
+        }
+
+    //end terminal
+
+    //funcion de la calculadora
+
+    function fakeSum() {
+        let input = document.getElementById('calc-input').value;
+        document.getElementById('calc-result').innerText += input;
+    }
+
+    //fin funcion de la calculadora
+    </script>
+</body>
+</html>
